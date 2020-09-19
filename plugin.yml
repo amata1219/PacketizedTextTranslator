@@ -1,0 +1,10 @@
+name: PacketizedTextTranslator
+main: amata1219.packetized.translator.Main
+version: 1.0.0
+api-version: 1.16
+author: "@amata1219"
+
+commands:
+  automatic-translation:
+    permission: packetized.text.translator.automatic.translation
+    permission-message: "§aパーミッションがありません！"
