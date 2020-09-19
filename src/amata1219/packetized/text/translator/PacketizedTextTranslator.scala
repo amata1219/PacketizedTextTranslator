@@ -5,16 +5,20 @@ import java.lang.reflect.{InvocationHandler, Method, Proxy}
 import amata1219.xeflection.{AnyReflected, NetMinecraftServer, Reflect}
 
 sealed trait PacketizedTextTranslator {
+  def text(packet: AnyReflected): String
   def apply(packet: AnyReflected, translator: String => String): Unit
 }
 
 case object ChatPacketizedTextTranslator extends PacketizedTextTranslator {
-  override def apply(packet: AnyReflected, translator: String => String): Unit = {
+  def text(packet: AnyReflected): String = {
     val component = packet.get[Any]("a")
+    Reflect.on(component)
+      .call("getText")
+      .as[String]
+  }
 
-    val text = Reflect.on(component).call("getText").as[String]
-    val translated: String = translator(text)
-
+  def apply(packet: AnyReflected, translated: String): Unit = {
+    val component = packet.get[Any]("a")
     val handler = new InvocationHandler {
       override def invoke(proxy: Any, method: Method, args: Array[AnyRef]): AnyRef = {
         if (method.getName == "getText") return translated
@@ -22,10 +26,10 @@ case object ChatPacketizedTextTranslator extends PacketizedTextTranslator {
       }
     }
 
-    val IChatBaseComponentClass: Class[_] = Class.forName(s"$NetMinecraftServer.IChatBaseComponent")
+    val clazz: Class[_] = Class.forName(s"$NetMinecraftServer.IChatBaseComponent")
     val translatedComponent: Any = Proxy.newProxyInstance(
-      IChatBaseComponentClass.getClassLoader,
-      Array(IChatBaseComponentClass),
+      clazz.getClassLoader,
+      Array(clazz),
       handler
     )
 

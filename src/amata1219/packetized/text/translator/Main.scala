@@ -4,7 +4,10 @@ import org.bukkit.plugin.java.JavaPlugin
 
 class Main extends JavaPlugin() {
 
-  Main.INSTANCE = this
+  Main.instance = this
+
+  val config = new Configuration("config.yml")
+  val translation = new Configuration("translation.yml")
 
   override def onEnable(): Unit = {
 
@@ -14,10 +17,10 @@ class Main extends JavaPlugin() {
 
   }
 
-  object Main {
+}
 
-    var INSTANCE: Main = _
+object Main {
 
-  }
+  var instance: Main = _
 
 }

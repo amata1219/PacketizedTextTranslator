@@ -19,8 +19,12 @@ class SendingPacketHandler(val player: Player) extends ChannelDuplexHandler {
       }
 
       val reflected: AnyReflected = Reflect.on(packet)
+      val text: String = translator.text(reflected)
 
-      translator.apply(reflected, SendingPacketHandler.translate)
+      Main.instance.translation.config.getString(text) match {
+        case null =>
+        case translated => translator.apply(reflected, translated)
+      }
     }
 
     super.write(context, packet, promise)
@@ -28,10 +32,6 @@ class SendingPacketHandler(val player: Player) extends ChannelDuplexHandler {
 
   implicit class XPlayer(val player: Player) {
     def isUsingAutomaticTranslation: Boolean = true
-  }
-
-  object SendingPacketHandler {
-    def translate(text: String): String = text
   }
 
 }
