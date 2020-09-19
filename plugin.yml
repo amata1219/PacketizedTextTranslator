@@ -7,4 +7,4 @@ author: "@amata1219"
 commands:
   automatic-translation:
     permission: packetized.text.translator.automatic.translation
-    permission-message: "§aパーミッションがありません！"
+    permission-message: "You don't have <permission>"

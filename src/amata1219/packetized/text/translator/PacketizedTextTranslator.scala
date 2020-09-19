@@ -5,11 +5,11 @@ import java.lang.reflect.{InvocationHandler, Method, Proxy}
 import amata1219.xeflection.{AnyReflected, NetMinecraftServer, Reflect}
 
 sealed trait PacketizedTextTranslator {
-  def translate(packet: AnyReflected, translator: String => String): Unit
+  def apply(packet: AnyReflected, translator: String => String): Unit
 }
 
-case object ChatPacketizedText extends PacketizedTextTranslator {
-  override def translate(packet: AnyReflected, translator: String => String): Unit = {
+case object ChatPacketizedTextTranslator extends PacketizedTextTranslator {
+  override def apply(packet: AnyReflected, translator: String => String): Unit = {
     val component = packet.get[Any]("a")
 
     val text = Reflect.on(component).call("getText").as[String]
