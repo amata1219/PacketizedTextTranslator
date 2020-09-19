@@ -1,5 +1,6 @@
 package amata1219.packetized.text.translator
 
+import org.bukkit.event.HandlerList
 import org.bukkit.plugin.java.JavaPlugin
 
 class Main extends JavaPlugin() {
@@ -9,12 +10,15 @@ class Main extends JavaPlugin() {
   val config = new Configuration("config.yml")
   val translation = new Configuration("translation.yml")
 
-  override def onEnable(): Unit = {
+  config.create()
+  translation.create()
 
+  override def onEnable(): Unit = {
+    getServer.getPluginManager.registerEvents(PlayerListener, this)
   }
 
   override def onDisable(): Unit = {
-
+    HandlerList.unregisterAll(this)
   }
 
 }
