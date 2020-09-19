@@ -31,7 +31,7 @@ class SendingPacketHandler(val player: Player) extends ChannelDuplexHandler {
   }
 
   implicit class XPlayer(val player: Player) {
-    def isUsingAutomaticTranslation: Boolean = true
+    def isUsingAutomaticTranslation: Boolean = Main.instance.config.config.getBoolean(player.getUniqueId.toString)
   }
 
 }
