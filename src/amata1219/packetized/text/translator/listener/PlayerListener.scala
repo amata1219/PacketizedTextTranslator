@@ -1,8 +1,8 @@
-package amata1219.packetized.text.translator
+package amata1219.packetized.text.translator.listener
 
 import amata1219.packetized.text.translator.packet.TranslatorInjection
-import org.bukkit.event.{EventHandler, Listener}
 import org.bukkit.event.player.{PlayerJoinEvent, PlayerQuitEvent}
+import org.bukkit.event.{EventHandler, Listener}
 
 object PlayerListener extends Listener {
 
