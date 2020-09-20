@@ -1,5 +1,5 @@
 name: PacketizedTextTranslator
-main: amata1219.packetized.translator.Main
+main: amata1219.packetized.text.translator.Main
 version: 1.0.0
 api-version: "1.16"
 author: "@amata1219"

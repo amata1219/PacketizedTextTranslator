@@ -1,8 +1,9 @@
-package amata1219.packetized.text.translator
+package amata1219.packetized.text.translator.configuration
 
-import java.io.{File, InputStreamReader}
+import java.io.{File, IOException, InputStreamReader}
 import java.nio.charset.StandardCharsets
 
+import amata1219.packetized.text.translator.Main
 import org.bukkit.configuration.file.{FileConfiguration, YamlConfiguration}
 
 class Configuration(val fileName: String) {
@@ -23,6 +24,16 @@ class Configuration(val fileName: String) {
         val reader = new InputStreamReader(input, StandardCharsets.UTF_8)
         val default: YamlConfiguration = YamlConfiguration.loadConfiguration(reader)
         value.setDefaults(default)
+    }
+  }
+
+  def save(): Unit = if (value != null) {
+    try {
+      value.save(file)
+    } catch {
+      case ex: IOException =>
+        println(s"Could not save config to $fileName")
+        ex.printStackTrace()
     }
   }
 

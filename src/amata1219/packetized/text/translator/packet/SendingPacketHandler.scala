@@ -25,7 +25,8 @@ class SendingPacketHandler(val player: Player) extends ChannelDuplexHandler {
 
     Main.instance.parallelTranslationConfig.config.getString(text) match {
       case null =>
-      case translated => translator.apply(reflected, translated)
+      case translated: String =>
+        translator.apply(reflected, translated)
     }
   }
 

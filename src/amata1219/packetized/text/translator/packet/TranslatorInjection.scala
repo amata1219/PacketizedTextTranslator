@@ -1,7 +1,8 @@
 package amata1219.packetized.text.translator.packet
 
 import amata1219.xeflection.Reflect
-import io.netty.channel.ChannelPipeline
+import io.netty.channel.{Channel, ChannelPipeline}
+import net.minecraft.server.v1_16_R2.EntityPlayer
 import org.bukkit.entity.Player
 
 object TranslatorInjection {
