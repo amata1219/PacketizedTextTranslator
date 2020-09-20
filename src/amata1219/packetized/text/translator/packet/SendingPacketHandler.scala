@@ -23,7 +23,7 @@ class SendingPacketHandler(val player: Player) extends ChannelDuplexHandler {
     val reflected: AnyReflected = Reflect.on(packet)
     val text: String = translator.text(reflected)
 
-    Main.instance.translation.config.getString(text) match {
+    Main.instance.parallelTranslationConfig.config.getString(text) match {
       case null =>
       case translated => translator.apply(reflected, translated)
     }

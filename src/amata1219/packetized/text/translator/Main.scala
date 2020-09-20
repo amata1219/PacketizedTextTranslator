@@ -9,11 +9,11 @@ class Main extends JavaPlugin() {
 
   Main.instance = this
 
-  val config = new Configuration("config.yml")
-  val translation = new Configuration("translation.yml")
+  val playerDataConfig = new Configuration("player-data.yml")
+  val parallelTranslationConfig = new Configuration("parallel-translation.yml")
 
-  config.create()
-  translation.create()
+  playerDataConfig.create()
+  parallelTranslationConfig.create()
 
   override def onEnable(): Unit = {
     getCommand("translation").setExecutor(TranslationCommand)
