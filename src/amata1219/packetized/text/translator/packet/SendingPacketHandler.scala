@@ -1,6 +1,7 @@
 package amata1219.packetized.text.translator.packet
 
 import amata1219.packetized.text.translator.Main
+import amata1219.packetized.text.translator.`extension`.BukkitPlayer.XPlayer
 import amata1219.packetized.text.translator.packet.PacketizedTextTranslator.ChatPacketizedTextTranslator
 import amata1219.xeflection.{AnyReflected, Reflect}
 import io.netty.channel.{ChannelDuplexHandler, ChannelHandlerContext, ChannelPromise}
@@ -9,7 +10,7 @@ import org.bukkit.entity.Player
 class SendingPacketHandler(val player: Player) extends ChannelDuplexHandler {
 
   override def write(context: ChannelHandlerContext, packet: Any, promise: ChannelPromise): Unit = {
-    if (player.isUsingAutomaticTranslation) translate(packet)
+    if (player.isUsingPacketizedTextTranslation) translate(packet)
     super.write(context, packet, promise)
   }
 
@@ -26,10 +27,6 @@ class SendingPacketHandler(val player: Player) extends ChannelDuplexHandler {
       case null =>
       case translated => translator.apply(reflected, translated)
     }
-  }
-
-  implicit class XPlayer(val player: Player) {
-    def isUsingAutomaticTranslation: Boolean = Main.instance.config.config.getBoolean(player.getUniqueId.toString)
   }
 
 }

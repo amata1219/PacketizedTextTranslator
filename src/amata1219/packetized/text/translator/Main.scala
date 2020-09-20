@@ -1,6 +1,6 @@
 package amata1219.packetized.text.translator
 
-import amata1219.packetized.text.translator.command.Configuration
+import amata1219.packetized.text.translator.command.TranslationCommand
 import amata1219.packetized.text.translator.listener.PlayerListener
 import org.bukkit.event.HandlerList
 import org.bukkit.plugin.java.JavaPlugin
@@ -16,6 +16,7 @@ class Main extends JavaPlugin() {
   translation.create()
 
   override def onEnable(): Unit = {
+    getCommand("translation").setExecutor(TranslationCommand)
     getServer.getPluginManager.registerEvents(PlayerListener, this)
   }
 

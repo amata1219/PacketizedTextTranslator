@@ -1,9 +1,8 @@
-package amata1219.packetized.text.translator.command
+package amata1219.packetized.text.translator
 
 import java.io.{File, InputStreamReader}
 import java.nio.charset.StandardCharsets
 
-import amata1219.packetized.text.translator.Main
 import org.bukkit.configuration.file.{FileConfiguration, YamlConfiguration}
 
 class Configuration(val fileName: String) {
